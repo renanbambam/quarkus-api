@@ -77,7 +77,6 @@ public class IncomeService {
 
     private IncomeDTO toDTO(Income income) {
         IncomeDTO dto = new IncomeDTO();
-        System.out.println("ssss " + income.getDayDate());
         dto.setEnterpriseId(income.getEnterpriseId());
         dto.setAmount(income.getAmount());
         dto.setDayDate(income.getDayDate());

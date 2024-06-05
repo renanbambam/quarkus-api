@@ -2,7 +2,7 @@ package org.acme.dto;
 
 public class AccountancyDTO {
     private String enterpriseId;
-    private double active;
+        private double active;
     private double passive;
     private double netWorth;
 

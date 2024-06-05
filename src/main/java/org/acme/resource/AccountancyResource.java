@@ -20,7 +20,7 @@ public class AccountancyResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RolesAllowed({"ADMIN", "ENTERPRISE"})
+    @RolesAllowed({"ENTERPRISE"})
     public Response addAccountancy(@Context HttpHeaders headers) {
         try {
             AccountancyDTO accountancy = accountancyService.calculateAccountancy(headers);

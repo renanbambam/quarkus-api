@@ -27,15 +27,15 @@ public class EnterpriseResource {
     }
 
     @GET
-    @RolesAllowed({"ADMIN"})
+    @RolesAllowed({"ADMIN", "ENTERPRISE"})
     public List<EnterpriseDTO> listEnterprises() {
         return enterpriseService.listEnterprises();
     }
 
     @GET
-    @Path("/{name}")
-    @RolesAllowed({"ADMIN"})
-    public Response getEnterpriseByName(@PathParam("name") String name) {
+    @Path("/name")
+    @RolesAllowed({"ENTERPRISE"})
+    public Response getEnterpriseByName(@QueryParam("name") String name) {
         try {
             List<Enterprise> enterprises = enterpriseService.getEnterpriseByName(name);
             if (enterprises != null && !enterprises.isEmpty()) {

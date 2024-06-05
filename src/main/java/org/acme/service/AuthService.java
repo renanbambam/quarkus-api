@@ -27,8 +27,6 @@ public class AuthService {
     @Inject
     JWTParser jwtParser;
 
-    private static final Logger LOGGER = Logger.getLogger(AuthService.class);
-
     public Token generateTokens(EnterpriseDTO credentials) {
         try {
             List<Enterprise> enterprise;
@@ -49,7 +47,7 @@ public class AuthService {
             }
 
             String accessToken = Jwt.issuer("https://example.com/issuer")
-                    .upn(credentials.getName())
+                    .upn(enterprise.getFirst().getName())
                     .groups(roles)
                     .claim("email", enterprise.getFirst().getEmail())
                     .claim("name", enterprise.getFirst().getName())
@@ -58,7 +56,7 @@ public class AuthService {
                     .sign();
 
             String refreshToken = Jwt.issuer("https://example.com/issuer")
-                    .upn(credentials.getName())
+                    .upn(enterprise.getFirst().getName())
                     .groups(roles)
                     .claim("email", enterprise.getFirst().getEmail())
                     .claim("id", enterprise.getFirst().getId())
@@ -70,7 +68,6 @@ public class AuthService {
 
             return new Token(accessToken, refreshToken);
         } catch (Exception e) {
-            LOGGER.error("Error generating JWT token", e);
             throw new RuntimeException("Error generating JWT token" + e);
         }
     }
@@ -142,7 +139,6 @@ public class AuthService {
                 return Optional.empty();
             }
         } catch (Exception e) {
-            LOGGER.error("Error validating refresh token", e);
             return Optional.empty();
         }
     }
@@ -154,7 +150,6 @@ public class AuthService {
                 JsonWebToken parsedToken = jwtParser.parse(token);
                 return parsedToken.getExpirationTime() < currentTime;
             } catch (Exception e) {
-                LOGGER.error("Error parsing token for cleanup", e);
                 return true;
             }
         });

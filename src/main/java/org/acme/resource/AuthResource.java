@@ -1,13 +1,9 @@
 package org.acme.resource;
 
-import io.smallrye.jwt.build.Jwt;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.acme.dto.EnterpriseDTO;
-import org.acme.model.Enterprise;
-import org.acme.model.RefreshToken;
 import org.acme.model.Token;
 import org.acme.service.AuthService;
 
